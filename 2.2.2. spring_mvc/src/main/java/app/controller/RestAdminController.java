@@ -12,44 +12,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-public class AdminController {
+@RequestMapping("/api/admin")
+public class RestAdminController {
 
     private final UserService userService;
 
-    public AdminController(UserService userService) {
+    public RestAdminController(UserService userService) {
         this.userService = userService;
     }
 
 
 
-    @GetMapping("/admin/getAllUsers")
+    @GetMapping("/getAllUsers")
     public ResponseEntity<Iterable<User>> getAllUsers() {
         return ResponseEntity.ok().body(userService.findAllUsers());
     }
 
-    @GetMapping("/admin/getAllRoles")
+    @GetMapping("/getAllRoles")
     public ResponseEntity<Iterable<Role>> getAllRoles() {
         return ResponseEntity.ok().body(userService.findAllRoles());
     }
 
-    @GetMapping("/admin/getUserById/{id}")
+    @GetMapping("/getUserById/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         return ResponseEntity.ok().body(userService.findById(id));
     }
 
-    @DeleteMapping("/admin/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         userService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("/admin/create")
+    @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         userService.addUser(user);
         return ResponseEntity.ok().body(user);
     }
 
-    @PutMapping("/admin/update")
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return ResponseEntity.ok().body(user);
