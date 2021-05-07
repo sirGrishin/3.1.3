@@ -2,7 +2,7 @@
 
 function getUsers() {
 
-    fetch("http://localhost:8080/admin/getAllUsers")
+    fetch("http://localhost:8080/api/admin/getAllUsers")
         .then((res) => res.json())
         .then((data) => {
             let temp = "";
@@ -33,7 +33,7 @@ getUsers()
 //------------------fillModals--------------------------------
 
 function fillModal(id) {
-    fetch("http://localhost:8080/admin/getUserById/" + id, {
+    fetch("http://localhost:8080/api/admin/getUserById/" + id, {
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ function newUserForm(e){
     let roles = selectRole(Array.from(document.getElementById("addRole").selectedOptions)
         .map(r => r.value));
 
-    fetch("http://localhost:8080/admin/create", {
+    fetch("http://localhost:8080/api/admin/create", {
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -127,7 +127,7 @@ function butEdit() {
             .map(r => r.value))
     }
 
-    fetch("http://localhost:8080/admin/update", {
+    fetch("http://localhost:8080/api/admin/update", {
         method: "PUT",
         headers: {
             'Accept': 'application/json',
@@ -155,7 +155,7 @@ function selectRole(r) {
 //------------------DELETE--------------------------------
 
 function butDelete() {
-    fetch("http://localhost:8080/admin/delete/" + document.getElementById('delId').value, {
+    fetch("http://localhost:8080/api/admin/delete/" + document.getElementById('delId').value, {
         method: 'DELETE',
         headers: {
             'Accept': 'application/json',
